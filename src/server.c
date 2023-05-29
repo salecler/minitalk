@@ -2,8 +2,8 @@
 
 void	handle_signal(int sig)
 {
-	static char	buffer[9] = {0};
-	static int	bit_count = 0;
+	static char		buffer[9] = {0};
+	static int		bit_count = 0;
 	static pid_t	client_pid = 0;
 
 	if (sig == SIGUSR1)
@@ -39,4 +39,3 @@ int	main(void)
 		pause();
 	return (0);
 }
-

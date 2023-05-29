@@ -2,9 +2,11 @@
 
 void	send_message(pid_t server_pid, char *message)
 {
+	int	i;
+
+	i = 7;
 	while (*message)
 	{
-		int i = 7;
 		while (i >= 0)
 		{
 			if ((*message >> i) & 1)
@@ -31,4 +33,3 @@ int	main(int argc, char **argv)
 	send_message(server_pid, argv[2]);
 	return (0);
 }
-
