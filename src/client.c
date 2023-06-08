@@ -1,35 +1,40 @@
 #include "../include/minitalk.h"
 
-void	send_message(pid_t server_pid, char *message)
+void	send_char(int pid, char c)
 {
-	int	i;
+	int	bit;
 
-	i = 7;
+	bit = 0;
+	while (bit < 8)
+	{
+		if ((c >> bit) & 1)
+			kill(pid, SIGUSR1);
+		else
+			kill(pid, SIGUSR2);
+		bit++;
+		usleep(100);
+	}
+}
+
+void	send_message(int pid, char *message)
+{
 	while (*message)
 	{
-		while (i >= 0)
-		{
-			if ((*message >> i) & 1)
-				kill(server_pid, SIGUSR1);
-			else
-				kill(server_pid, SIGUSR2);
-			usleep(100);
-			i--;
-		}
+		send_char(pid, *message);
 		message++;
 	}
 }
 
 int	main(int argc, char **argv)
 {
-	pid_t	server_pid;
+	int	pid;
 
 	if (argc != 3)
 	{
-		ft_printf("Usage: %s <server_pid> <message>\n", argv[0]);
+		printf("Usage: ./client [server_pid] [message]\n");
 		return (1);
 	}
-	server_pid = ft_atoi(argv[1]);
-	send_message(server_pid, argv[2]);
+	pid = atoi(argv[1]);
+	send_message(pid, argv[2]);
 	return (0);
 }
