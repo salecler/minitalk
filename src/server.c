@@ -5,7 +5,7 @@ static void	sig_handler(int sig)
 	static unsigned char	c = 0;
 	static int				bit = 0;
 
-	if (sig == SIGUSR1)
+	if (sig == SIGUSR2)
 		c |= (1 << bit);
 	bit++;
 	if (bit == 8)

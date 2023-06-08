@@ -8,9 +8,9 @@ void	send_char(int pid, char c)
 	while (bit < 8)
 	{
 		if ((c >> bit) & 1)
-			kill(pid, SIGUSR1);
-		else
 			kill(pid, SIGUSR2);
+		else
+			kill(pid, SIGUSR1);
 		bit++;
 		usleep(100);
 	}
@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 3)
 	{
-		printf("Usage: ./client [server_pid] [message]\n");
+		ft_printf("Usage: ./client [server_pid] [message]\n");
 		return (1);
 	}
 	pid = atoi(argv[1]);
