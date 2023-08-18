@@ -1,4 +1,4 @@
-#include "../include/minitalk.h"
+#include "../include/minitalk_bonus.h"
 
 static void	sig_handler(int sig)
 {
@@ -10,10 +10,7 @@ static void	sig_handler(int sig)
 	bit++;
 	if (bit == 8)
 	{
-		if (c == '\0')
-			write(1, "\n", 1);
-		else
-			write(1, &c, 1);
+		write(1, &c, 1);
 		c = 0;
 		bit = 0;
 	}
@@ -24,7 +21,7 @@ int	main(void)
 	pid_t	pid;
 
 	pid = getpid();
-	printf("Server PID: %d\n", pid);
+	ft_printf("Server PID: %d\n", pid);
 	signal(SIGUSR1, sig_handler);
 	signal(SIGUSR2, sig_handler);
 	while (1)
