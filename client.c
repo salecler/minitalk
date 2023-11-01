@@ -24,7 +24,7 @@ void	send_char(int pid, char c)
 		else
 			kill(pid, SIGUSR1);
 		bit++;
-		usleep(100);
+		usleep(400);
 	}
 }
 
